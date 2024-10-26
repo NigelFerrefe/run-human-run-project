@@ -63,6 +63,10 @@ Will control:
 
 ##TODO LIST
 
-- Create the html documents
+- Create the html content
+    - Game start
+    - Instructions
+    - Map area
+    - Game over 
 - Create the css simple version
 - Create the functions
