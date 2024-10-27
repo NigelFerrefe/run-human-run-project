@@ -70,3 +70,13 @@ Will control:
     - Game over 
 - Create the css simple version
 - Create the functions
+
+##### Map area
+
+It will have 4 levels, start the first and once you win the round, you get to another bigger level. 
+With the game area at 100vh and vw:
+    - 1 Level: 40vh/vw
+    - 2 Level: 60vh/vw
+    - 3 Level: 80vh/vw
+    - 4 Level: 100vh/vw
+The walls and ground has 20px square, so it will be easy to calculate the spaces
