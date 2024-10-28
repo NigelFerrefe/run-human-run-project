@@ -1,71 +1,77 @@
 // this file is in charge of all the game logic, event listeners, etc
 
-document.addEventListener("keypress", (e) => {
-  switch (e.key) {
-    case "a":
-    case "ArrowLeft":
-      player.direction = "left";
-      break;
-    case "d":
-    case "ArrowRight":
-      player.direction = "right";
-      break;
-    case "s":
-    case "ArrowDown":
-      player.direction = "down";
-      break;
-    case "w":
-    case "ArrowUp":
-      player.direction = "up";
-      break;
-  }
-});
-
-document.addEventListener("keyup", (e) => {
-  switch (e.key) {
-    case "a":
-    case "ArrowLeft":
-    case "d":
-    case "ArrowRight":
-    case "s":
-    case "ArrowDown":
-    case "w":
-    case "ArrowUp":
-      player.direction = null;
-      break;
-  }
-});
-
-function catchPrisoner() {
-  const playerLeftEdge = player.left;
-  const playerRightEdge = player.left + player.width;
-  const playerTopEdge = player.top;
-  const playerBottomEdge = player.top + player.height;
-
-  const prisonerLeftEdge = prisoner.element.getBoundingClientRect().left;
-  const prisonerRightEdge = prisonerLeftEdge + prisoner.width;
-  const prisonerTopEdge = prisoner.element.getBoundingClientRect().top;
-  const prisonerBottomEdge = prisonerTopEdge + prisoner.height;
-
-
+function catchPrisoner(player, prisoner) {
+  const playerEdges = player.getEdges();
+  const prisonerEdges = prisoner.getEdges();
 
   if (
-    playerLeftEdge < prisonerRightEdge &&
-    playerRightEdge > prisonerLeftEdge &&
-    playerTopEdge < prisonerBottomEdge &&
-    playerBottomEdge > prisonerTopEdge
+    playerEdges.left < prisonerEdges.right &&
+    playerEdges.right > prisonerEdges.left &&
+    playerEdges.top < prisonerEdges.bottom &&
+    playerEdges.bottom > prisonerEdges.top
   ) {
     console.log("Collision detected!");
     prisoner.catch();
   }
 }
 
-function gameLoop() {
+function addMovementControls(player) {
+  document.addEventListener("keydown", (event) => {
+    switch (event.key) {
+      case "w":
+        player.move(0, -1);
+        break;
+      case "s":
+        player.move(0, 1);
+        break;
+      case "a":
+        player.move(-1, 0);
+        break;
+      case "d":
+        player.move(1, 0);
+        break;
+    }
+  });
+}
+function init() {
+  const level = levels[0];
+  const mapGen = new MapGenerator("game-area", level);
+  mapGen.generateMap();
+  mapGen.sizeUp();
+
+  const player = new Player(
+    level.player.x,
+    level.player.y,
+    level.map,
+    mapGen.tileDim
+  );
+  const playerLayer = mapGen.el.querySelector("#sprites");
+  playerLayer.appendChild(player.el);
+
+  const prisoner = new Prisoner(
+    level.prisoner.x,
+    level.prisoner.y,
+    level.map,
+    mapGen.tileDim
+  );
+  const prisonerLayer = mapGen.el.querySelector("#sprites");
+  prisonerLayer.appendChild(prisoner.el);
+
+  addMovementControls(player);
+
+  setInterval(() => catchPrisoner(player, prisoner), 1000);
+  //catchPrisoner(player, prisoner);
+}
+
+init();
+
+/*function gameLoop() {
   if (!game.isGameOver) {
     frames++;
-    player.move();
+    init()
+    
     catchPrisoner();
   }
   requestAnimationFrame(gameLoop);
 }
-requestAnimationFrame(gameLoop);
+requestAnimationFrame(gameLoop);*/

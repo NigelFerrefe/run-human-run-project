@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
-    <!--<section class="game-start">
+    <section class="game-start">
       <p>
         It's a bright, sunny day in Crete, perfect for a first day on the job.
         As the new keeper of the labyrinth, you feel proud and powerful, and you
@@ -23,21 +23,26 @@
         their cells like ants at a picnic. "Great," you think, "this is exactly
         how I wanted my first day to go."
       </p>
-      <div class="buttons-start">
-        <button>Start game</button>
-        <button>Instructions</button>
-        <div id="instructions" class="hidden">
-            <p>These are the instructions that will appear or disappear.</p>
+      <div>
+        <button class="game-button">Start your first day</button>
+        <div id="instructions" class="visible not-visible instructions">
+          <p>You play X rounds. In each round u have to catch the prisoner within the time limit. Move with WASD. Cath the prisoner within the time limit or you will get fired</p>
+          <button id="instructions-button">Start game</button>
         </div>
       </div>
-    </section> -->
+    </section> 
+    <div id="timer" class="timer">
+      <div id="time"></div>
+      <div id="toast" class="toast">
+        <span id="toast-message"></span>
+        <span id="close-toast"></span>
+      </div>
+    </div>
     <section id="game-area">
-      <!--<div id="maze-map" class="maze-map">-->
-        <div id="walls" class="maze">W</div>
-        <div id="ground" class="maze">G</div>
-        <div id="player">Pl</div>
-        <div id="prisoner">Pr</div>
-      <!--</div>-->
+      <div id="maze-map" class='maze-map'>
+        <div id="tiles" class="maze"></div>
+        <div id="sprites" class="maze"></div>
+      </div>
     </section>
     <!--<section id="game-win">
         <h2>You are a professional!</h2>
@@ -52,9 +57,8 @@
         </div>
     </section>-->
   </body>
-
-  <script src="./game.js"></script>
-  <script src="./characters.js"></script>
-  
-  <script src="./logic.js"></script>
+  <script src="game.js"></script>
+  <script src="characters.js"></script>
+  <script src="./index.js"></script>
+  <script src="logic.js"></script>
 </html>
