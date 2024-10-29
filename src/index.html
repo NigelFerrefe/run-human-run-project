@@ -5,32 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RUN HUMAN, RUN</title>
     <link rel="stylesheet" href="./style/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <section class="game-start">
       <p>
-        It's a bright, sunny day in Crete, perfect for a first day on the job.
-        As the new keeper of the labyrinth, you feel proud and powerful, and you
-        stride through the labyrinth with the confidence of a legendary beast.
+        IT'S A BRIGHT, SUNNY DAY IN CRETE, PERFECT FOR A FIRST DAY AT JOB.
+        AS THE NEW KEEPER OF THE LABYRINTH, YOU FEEL PROUD AND POWERFUL, AND YOU
+        STRIDE THROUGH THE LABYRINTH WITH THE CONFIDENCE OF A LEGENDARY BEAST.
       </p>
       <p>
-        But suddenly, disaster strikes! You pat yourself on the side and, oh no,
-        the keys to the cages are gone! They're not in your pocket or inside
-        your lunchbox full of roasted villager thighs.
+        BUT SUDDENLY, DISASTER STRIKES! YOU PAT YOURSELF ON THE SIDE AND, OH NO,
+        THE KEYS TO THE CAGES ARE GONE! THEY'RE NOT IN YOUR POCKET OR INSIDE
+        YOUR LUNCHBOX FULL OF ROASTED VILLAGER THIGHS.
       </p>
       <p>
-        The prisoners, watching their golden opportunity, begin to scurry out of
-        their cells like ants at a picnic. "Great," you think, "this is exactly
-        how I wanted my first day to go."
+        THE PRISONER, WATCHING HIS GOLDEN OPPORTUNITY, BEGIN TO SCURRY OUT OF
+        HIS CELL LIKE ANTS AT A PICNIC. "GREAT," YOU THINK, "THIS IS EXACTLY
+        HOW I WANTED MY FIRST DAY TO GO."
       </p>
       <div>
-        <button class="game-button">Start your first day</button>
+        <button class="game-button">START YOUR FIRST DAY</button>
         <div id="instructions" class="visible not-visible instructions">
-          <p>You play X rounds. In each round u have to catch the prisoner within the time limit. Move with WASD. Cath the prisoner within the time limit or you will get fired</p>
-          <button id="instructions-button">Start game</button>
+          <p>YOU HAVE 60 SECONDS TO FIND THE PRISONER</p>
+          <img
+            src="./assets/Instructions.png"
+            alt="minotaur-instructions"
+            id="instructions-img"
+          />
+          <p>MOVE WITH W A S D KEYBOARD</p>
+          <button id="instructions-button">START GAME</button>
         </div>
       </div>
-    </section> 
+    </section>
     <div id="timer" class="timer">
       <div id="time"></div>
       <div id="toast" class="toast">
@@ -39,23 +51,22 @@
       </div>
     </div>
     <section id="game-area">
-      <div id="maze-map" class='maze-map'>
+      <div id="maze-map" class="maze-map">
         <div id="tiles" class="maze"></div>
         <div id="sprites" class="maze"></div>
       </div>
     </section>
-    <!--<section id="game-win">
-        <h2>You are a professional!</h2>
-        <h2>No one will ever know what happened on here</h2>
-        <button id="next-round">Go next round!</button>
+    <section class="game-win">
+      <p>YOU ARE A PROFESSIONAL</p>
+      <p>NO ONE WILL EVER KNOW WHAT HAPPENED HERE...</p>
+      <button id="next-round">GO NEXT ROUND!</button>
     </section>
-    <section id="game-over">
-        <div>
-      <h2>You could not catch all the prisoners on time...</h2>
-      <h2>You are fired!</h2>
-      <button id="restart-game">Try again</button>
-        </div>
-    </section>-->
+    <section class="game-over">
+      <p>¡YOU DID NOT CAUGHT THE PRISONER ON TIME, YOU ARE FIRED!</p>
+      <img src="./assets/Minotaur-no-clue.png" alt="minotaur-no-clue">
+      <button id="restart-game">TRY AGAIN</button>
+    </section>
+    <div id="message-container"></div>
   </body>
   <script src="game.js"></script>
   <script src="characters.js"></script>

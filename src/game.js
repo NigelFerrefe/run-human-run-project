@@ -2,70 +2,70 @@ class Game {
   constructor() {
     this.isGameOver = false;
     this.gameArea = document.querySelector("#game-area");
-    this.width = this.gameArea.getBoundingClientRect().width;
-    this.height = this.gameArea.getBoundingClientRect().height;
+    this.gameStart = document.querySelector(".game-start");
+    this.gameButton = document.querySelector(".game-button");
+    this.instructions = document.querySelector("#instructions");
+    this.duration = 4;
+    this.remainingTime = this.duration;
+    this.timer = null;
+    this.toastMessage = document.querySelector("#toast-message");
+    this.startRound = document.querySelector("#instructions-button");
+    this.initGame();
+  }
+
+  initGame() {
+    this.gameButton.addEventListener("click", () => {
+      this.instructions.classList.toggle("not-visible");
+    });
+
+    this.startRound.addEventListener("click", () => {
+      this.startCountdown()
+      this.gameStart.style.display = "none";
+    });
+  }
+
+  startCountdown() {
+    this.timer = setInterval(() => {
+      this.startRound.disabled = true;
+      this.remainingTime--;
+      const timerElement = document.querySelector("#time");
+      timerElement.innerText = this.remainingTime;
+
+      if (this.remainingTime === 60) {
+        
+        this.showToast(
+          `You have ${this.remainingTime} seconds to find the prisoner`
+        );
+      } else if (this.remainingTime === 30) {
+        
+        this.showToast(`${this.remainingTime} secs left, boss will fire me`);
+      } else if (this.remainingTime < 5) {
+        
+        this.showToast(
+          `Omg ${this.remainingTime} secs, my wife will kill me if I lose another job`
+        );
+        
+        //this.startRound.disabled = false;
+      }
+      if (this.remainingTime <= 0) {
+        game.isGameOver = true;
+        console.log(game.isGameOver);
+
+        clearInterval(this.timer);
+        
+      }
+      console.log(this.remainingTime);
+    }, 1000);
+  }
+
+  showToast(message) {
+    const toastMessageElement = document.querySelector("#toast");
+    toastMessageElement.classList.add("show");
+    this.toastMessage.innerText = message;
+    setTimeout(() => {
+      toastMessageElement.classList.remove("show");
+    }, 3000);
   }
 }
-
-
-
-
-const duration = 65;
-let remainingTime = duration;
-let timer = null;
-
-const toastMessage = document.querySelector("#toast-message");
-
-const startRound = document.querySelector("#instructions-button");
-startRound.addEventListener("click", () => {
-  startCountdown();
-});
-
-function startCountdown() {
-  timer = setInterval(() => {
-    startRound.disabled = true;
-    remainingTime--;
-    const timerElement = document.querySelector("#time");
-    timerElement.innerText = remainingTime;
-    
-    if (remainingTime === 60) {
-      console.log(remainingTime);
-      showToast(`You have ${remainingTime} seconds to find the prisoner`);
-    } else if (remainingTime === 30) {
-      console.log(remainingTime);
-      showToast(`${remainingTime} secs left, boss will fire me`);
-    } else if (remainingTime <= 5) {
-      console.log(remainingTime);
-      clearInterval(timer);
-      showToast(`Omg ${remainingTime} secs, my wife will kill me if I lose another job`);
-      startRound.disabled = false;
-    }
-  }, 1000);
-  console.log(remainingTime);
-}
-
-function showToast(message) {
-  const toastMessageElement = document.querySelector("#toast");
-  toastMessageElement.classList.add("show");
-  const closeButton = document.querySelector("#close-toast");
-  closeButton.addEventListener("click", () => {
-    toastMessageElement.classList.remove("show");
-  });
-
-  toastMessage.innerText = message;
-
-  setTimeout(() => {
-    toastMessageElement.classList.remove("show");
-  }, 3000);
-}
-
-
-
-
-const gameButton = document.querySelector(".game-button");
-const instructions = document.querySelector("#instructions");
-gameButton.addEventListener("click", () => {
-  instructions.classList.toggle("not-visible");
-});
 
 let game = new Game();

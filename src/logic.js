@@ -1,4 +1,9 @@
 // this file is in charge of all the game logic, event listeners, etc
+const winMessage = document.querySelector(".game-win");
+const loseMessage = document.querySelector(".game-over");
+const restartButtonElement = document.querySelector("#restart-game");
+const nextRound = document.querySelector("#next-round");
+const messageContainer = document.querySelector("#message-container");
 
 function catchPrisoner(player, prisoner) {
   const playerEdges = player.getEdges();
@@ -12,27 +17,57 @@ function catchPrisoner(player, prisoner) {
   ) {
     console.log("Collision detected!");
     prisoner.catch();
+    return true;
+  }
+  return false;
+}
+
+function winCondition(player, prisoner) {
+  if (catchPrisoner(player, prisoner)) {
+    console.log("Amazing, you catch the prisoner on time");
+    // Additional win logic can be handled here, like stopping the game
+    clearInterval(game.timer);
+    winMessage.style.display = "flex";
+    console.log("The time has stopped");
+    winMessage.style.zIndex = "3";
+    winMessage.style.backgroundColor = "black";
   }
 }
 
-function addMovementControls(player) {
-  document.addEventListener("keydown", (event) => {
-    switch (event.key) {
-      case "w":
-        player.move(0, -1);
-        break;
-      case "s":
-        player.move(0, 1);
-        break;
-      case "a":
-        player.move(-1, 0);
-        break;
-      case "d":
-        player.move(1, 0);
-        break;
-    }
-  });
+function gameOver() {
+  if (game.isGameOver) {
+    console.log("Times up!");
+    clearInterval(game.timer);
+    loseMessage.style.display = "flex";
+    loseMessage.style.zIndex = "3";
+    loseMessage.style.backgroundColor = "black";
+  }
 }
+
+restartButtonElement.addEventListener("click", () => {
+  // window.location.reload()
+  console.log("U restarted the game");
+  restartGame();
+});
+
+function restartGame() {
+  console.log("You restarted the game");
+
+  // Clear the game area or specific elements
+  const playerLayer = document.querySelector("#sprites");
+  playerLayer.innerHTML = ""; // This removes all children of the sprite layer
+
+  // Reset necessary game state variables
+  game.isGameOver = false;
+
+  winMessage.style.display = "none";
+  loseMessage.style.display = "none";
+
+  game = new Game();
+  game.startCountdown();
+  init();
+}
+
 function init() {
   const level = levels[0];
   const mapGen = new MapGenerator("game-area", level);
@@ -59,19 +94,48 @@ function init() {
 
   addMovementControls(player);
 
-  setInterval(() => catchPrisoner(player, prisoner), 1000);
-  //catchPrisoner(player, prisoner);
+  const gameLoop = setInterval(() => {
+    if (!game.isGameOver) {
+      winCondition(player, prisoner);
+    } else {
+      clearInterval(gameLoop);
+      gameOver();
+    }
+  }, 1000);
 }
 
 init();
 
-/*function gameLoop() {
-  if (!game.isGameOver) {
-    frames++;
-    init()
-    
-    catchPrisoner();
-  }
-  requestAnimationFrame(gameLoop);
+nextRound.addEventListener("click", () => {
+  messageContainer.innerHTML = `
+  <p>THANKS FOR PLAYING THIS BETA</p>
+  <p>MORE LEVELS AND FEATURES WILL BE LOADED ASAP</p>
+            <img
+            src="./assets/Instructions.png"
+            alt="minotaur-instructions"
+            id="instructions-img"
+          />
+  <p>Made by: Nigel Ferreres</p>
+  `;
+  messageContainer.classList.add("show");
+});
+
+function addMovementControls(player) {
+  document.addEventListener("keydown", (event) => {
+    switch (event.key) {
+      case "w":
+        player.move(0, -1);
+        break;
+      case "s":
+        player.move(0, 1);
+        break;
+      case "a":
+        player.move(-1, 0);
+        break;
+      case "d":
+        player.move(1, 0);
+        break;
+    }
+    console.log("You are moving");
+  });
 }
-requestAnimationFrame(gameLoop);*/

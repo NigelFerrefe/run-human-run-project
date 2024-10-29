@@ -108,19 +108,3 @@ class MapGenerator {
 }
 
 
-
-
-/*placeSprite(type) {
-    let x = this[type].x;
-    let y = this[type].y;
-    let sprite = this.createEl(x, y, type);
-    sprite.id = type;
-    sprite.style.borderRadius = this.tileDim + "px";
-    let layer = this.el.querySelector("#sprites");
-    layer.appendChild(sprite);
-    return sprite;
-    
-    
-  }*/
-
-

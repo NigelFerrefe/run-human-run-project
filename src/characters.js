@@ -5,6 +5,7 @@ class Player {
     this.map = map;
     this.tileDim = tileDim;
     this.el = this.createPlayerElement();
+    
   }
 
   createPlayerElement() {
