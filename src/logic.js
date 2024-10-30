@@ -4,6 +4,16 @@ const loseMessage = document.querySelector(".game-over");
 const restartButtonElement = document.querySelector("#restart-game");
 const nextRound = document.querySelector("#next-round");
 const messageContainer = document.querySelector("#message-container");
+const screenGameSound = document.querySelector("#screen-sound");
+const gameSound = document.querySelector("#game-sound");
+const winGameSound = document.querySelector("#prisoner-caugth");
+const loseGameSound = document.querySelector("#time-over");
+let soundPlayed = false;
+
+
+document.addEventListener("click", () => {
+  screenGameSound.play();
+}, { once: true });
 
 function catchPrisoner(player, prisoner) {
   const playerEdges = player.getEdges();
@@ -17,6 +27,7 @@ function catchPrisoner(player, prisoner) {
   ) {
     console.log("Collision detected!");
     prisoner.catch();
+
     return true;
   }
   return false;
@@ -25,7 +36,12 @@ function catchPrisoner(player, prisoner) {
 function winCondition(player, prisoner) {
   if (catchPrisoner(player, prisoner)) {
     console.log("Amazing, you catch the prisoner on time");
-    // Additional win logic can be handled here, like stopping the game
+    gameSound.pause();
+
+    if (!soundPlayed) {
+      winGameSound.play();
+      soundPlayed = true;
+    }
     clearInterval(game.timer);
     winMessage.style.display = "flex";
     console.log("The time has stopped");
@@ -37,6 +53,13 @@ function winCondition(player, prisoner) {
 function gameOver() {
   if (game.isGameOver) {
     console.log("Times up!");
+    gameSound.pause();
+    gameSound.currentTime = 0;
+    if (!soundPlayed) {
+      loseGameSound.play();
+
+      soundPlayed = true;
+    }
     clearInterval(game.timer);
     loseMessage.style.display = "flex";
     loseMessage.style.zIndex = "3";
@@ -59,7 +82,8 @@ function restartGame() {
 
   // Reset necessary game state variables
   game.isGameOver = false;
-
+  soundPlayed = false;
+  gameSound.play();
   winMessage.style.display = "none";
   loseMessage.style.display = "none";
 
@@ -118,6 +142,8 @@ nextRound.addEventListener("click", () => {
   <p>Made by: Nigel Ferreres</p>
   `;
   messageContainer.classList.add("show");
+  screenGameSound.play();
+  setInterval(() => alert("Close or reload screen to exit"), 5000);
 });
 
 function addMovementControls(player) {

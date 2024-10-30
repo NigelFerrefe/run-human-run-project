@@ -1,3 +1,5 @@
+
+
 class Player {
   constructor(x, y, map, tileDim) {
     this.x = x;
@@ -35,7 +37,10 @@ class Player {
       this.el.style.left = this.x * this.tileDim + "px";
       this.el.style.top = this.y * this.tileDim + "px";
     }
+    
   }
+
+
 
   getEdges() {
     return {
