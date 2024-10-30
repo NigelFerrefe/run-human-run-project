@@ -106,7 +106,7 @@ button:active {
   left: 50%;
   bottom: 26px;
   font-size: 17px;
-  transform: translateX(-50%); /* Center the toast dynamically */
+  transform: translateX(-50%); 
   overflow: hidden;
 }
 
@@ -166,6 +166,7 @@ div.maze div {
   background-repeat: no-repeat;
   transition: left 0.2s linear, top 0.2s linear;
 }
+
 
 /*--------------GAME CONDITIONS-------------------*/
 

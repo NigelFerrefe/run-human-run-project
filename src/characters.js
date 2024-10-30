@@ -1,5 +1,3 @@
-
-
 class Player {
   constructor(x, y, map, tileDim) {
     this.x = x;
@@ -7,7 +5,6 @@ class Player {
     this.map = map;
     this.tileDim = tileDim;
     this.el = this.createPlayerElement();
-    
   }
 
   createPlayerElement() {
@@ -37,20 +34,16 @@ class Player {
       this.el.style.left = this.x * this.tileDim + "px";
       this.el.style.top = this.y * this.tileDim + "px";
     }
-    
   }
-
-
 
   getEdges() {
     return {
       left: this.x * this.tileDim,
-      right: (this.x * this.tileDim) + this.tileDim,
+      right: this.x * this.tileDim + this.tileDim,
       top: this.y * this.tileDim,
-      bottom: (this.y * this.tileDim) + this.tileDim
+      bottom: this.y * this.tileDim + this.tileDim,
     };
   }
-
 }
 
 class Prisoner {
@@ -72,18 +65,15 @@ class Prisoner {
     return sprite;
   }
   catch() {
-    
-    this.el.remove()
-    console.log('Removed prisoner from map: ', this.el);
-    
+    this.el.remove();
+    console.log("Removed prisoner from map: ", this.el);
   }
   getEdges() {
     return {
       left: this.x * this.tileDim,
-      right: (this.x * this.tileDim) + this.tileDim,
+      right: this.x * this.tileDim + this.tileDim,
       top: this.y * this.tileDim,
-      bottom: (this.y * this.tileDim) + this.tileDim
+      bottom: this.y * this.tileDim + this.tileDim,
     };
   }
-
 }

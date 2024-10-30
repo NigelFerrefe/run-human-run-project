@@ -1,4 +1,3 @@
-// this file is in charge of all the game logic, event listeners, etc
 const winMessage = document.querySelector(".game-win");
 const loseMessage = document.querySelector(".game-over");
 const restartButtonElement = document.querySelector("#restart-game");
@@ -10,10 +9,13 @@ const winGameSound = document.querySelector("#prisoner-caugth");
 const loseGameSound = document.querySelector("#time-over");
 let soundPlayed = false;
 
-
-document.addEventListener("click", () => {
-  screenGameSound.play();
-}, { once: true });
+document.addEventListener(
+  "click",
+  () => {
+    screenGameSound.play();
+  },
+  { once: true }
+);
 
 function catchPrisoner(player, prisoner) {
   const playerEdges = player.getEdges();

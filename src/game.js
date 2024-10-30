@@ -22,7 +22,8 @@ class Game {
     this.startRound.addEventListener("click", () => {
       this.startCountdown();
       this.gameStart.style.display = "none";
-      gameSound.play()
+      gameSound.play();
+      gameSound.loop = true;
       this.screenGameSound.pause();
       this.screenGameSound.currentTime = 0;
     });
@@ -45,8 +46,6 @@ class Game {
         this.showToast(
           `Omg ${this.remainingTime} secs, my wife will kill me if I lose another job`
         );
-
-        //this.startRound.disabled = false;
       }
       if (this.remainingTime <= 0) {
         game.isGameOver = true;
@@ -68,4 +67,3 @@ class Game {
 }
 
 let game = new Game();
-

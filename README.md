@@ -1,9 +1,8 @@
-# RUN HUMAN, RUN 
+# RUN HUMAN, RUN
 
 ## Description
 
 Welcome to your first day on the job as the new keeper of the famous Labyrinth. Everything was going well until, oops, you lost the keys! Now, prisoners are escaping and it's up to you to catch them all before your boss finds out, and get fired from your job.
-
 
 ## Story
 
@@ -11,33 +10,22 @@ It's a bright, sunny day in Crete, perfect for a first day on the job. As the ne
 
 The prisoners, watching their golden opportunity, begin to scurry out of their cells like ants at a picnic. "Great," you think, "this is exactly how I wanted my first day to go."
 
-
 ## Classes
 
-
-### Character
+### Player
 
 This class will have the following attributes:
+
 - X: the x position of the character.
 - y: the y position of the character.
-- speed: the speed movement of the character.
 - width: the width of the character.
 - heigth: the heigth of the character.
 - element: the html element.
 
-Will have the function movement
-
-This class will have two extended classes:
-
-#### Player
-
-#### Prisoner
-Will have also a function to get captured.
-
-
 ### Game
 
 Will contain all the game logic on the HUD:
+
 - isGameOver: a boolean to check if the game is over.
 - player: the player object.
 - prisoners: the array of prisoners.
@@ -48,10 +36,14 @@ Will contain all the game logic on the HUD:
 - gameOverScreen:
 - Instructions:
 
+### Map
+
+This generates the map level, and positions of the player and prisoner
 
 ### Logic
 
 Will control:
+
 - gameLoop
 - collisions
 - wallCollisions
@@ -60,23 +52,10 @@ Will control:
 - stopMovements
 - sounds
 
+## Features pending
 
-##TODO LIST
-
-- Create the html content
-    - Game start
-    - Instructions
-    - Map area
-    - Game over 
-- Create the css simple version
-- Create the functions
-
-##### Map area
-
-It will have 4 levels, start the first and once you win the round, you get to another bigger level. 
-With the game area at 100vh and vw:
-    - 1 Level: 40vh/vw
-    - 2 Level: 60vh/vw
-    - 3 Level: 80vh/vw
-    - 4 Level: 100vh/vw
-The walls and ground has 20px square, so it will be easy to calculate the spaces
+- Include more levels
+- Randomize the map generator
+- Fog vision on player
+- Power ups on player
+- The prisoner can scape when they see the player approaching
