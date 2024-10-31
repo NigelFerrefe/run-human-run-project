@@ -137,7 +137,7 @@ nextRound.addEventListener("click", () => {
   <p>THANKS FOR PLAYING THIS BETA</p>
   <p>MORE LEVELS AND FEATURES WILL BE LOADED ASAP</p>
             <img
-            src="./assets/Instructions.png"
+            src="./src/assets/Instructions.png"
             alt="minotaur-instructions"
             id="instructions-img"
           />
