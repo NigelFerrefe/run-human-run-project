@@ -38,13 +38,13 @@ class Game {
 
       if (this.remainingTime === 60) {
         this.showToast(
-          `You have ${this.remainingTime} seconds to find the prisoner`
+          `YOU HAVE ${this.remainingTime} SECONDS TO FIND THE PRISONER`
         );
       } else if (this.remainingTime === 30) {
-        this.showToast(`${this.remainingTime} secs left, boss will fire me`);
+        this.showToast(`${this.remainingTime} SECS LEFT, BOSS IS GOING TO FIRE ME`);
       } else if (this.remainingTime < 5) {
         this.showToast(
-          `Omg ${this.remainingTime} secs, my wife will kill me if I lose another job`
+          `OMG ${this.remainingTime} SECS, MY WIFE WILL KILL ME IF I LOSE ANOTHER JOB`
         );
       }
       if (this.remainingTime <= 0) {

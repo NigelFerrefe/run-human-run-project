@@ -1,20 +1,35 @@
-class Player {
+class Character {
   constructor(x, y, map, tileDim) {
     this.x = x;
     this.y = y;
     this.map = map;
     this.tileDim = tileDim;
-    this.el = this.createPlayerElement();
+    this.el = this.createCharacterElement();
   }
 
-  createPlayerElement() {
+  createCharacterElement() {
     const sprite = document.createElement("div");
-    sprite.className = "player";
     sprite.style.left = this.x * this.tileDim + "px";
     sprite.style.top = this.y * this.tileDim + "px";
     sprite.style.width = sprite.style.height = this.tileDim + "px";
     sprite.style.borderRadius = this.tileDim + "px";
     return sprite;
+  }
+
+  getEdges() {
+    return {
+      left: this.x * this.tileDim,
+      right: this.x * this.tileDim + this.tileDim,
+      top: this.y * this.tileDim,
+      bottom: this.y * this.tileDim + this.tileDim,
+    };
+  }
+}
+
+class Player extends Character {
+  constructor(x, y, map, tileDim) {
+    super(x, y, map, tileDim);
+    this.el.className = "player";
   }
 
   move(dx, dy) {
@@ -35,45 +50,16 @@ class Player {
       this.el.style.top = this.y * this.tileDim + "px";
     }
   }
-
-  getEdges() {
-    return {
-      left: this.x * this.tileDim,
-      right: this.x * this.tileDim + this.tileDim,
-      top: this.y * this.tileDim,
-      bottom: this.y * this.tileDim + this.tileDim,
-    };
-  }
 }
 
-class Prisoner {
+class Prisoner extends Character {
   constructor(x, y, map, tileDim) {
-    this.x = x;
-    this.y = y;
-    this.map = map;
-    this.tileDim = tileDim;
-    this.el = this.createPrisonerElement();
+    super(x, y, map, tileDim);
+    this.el.className = "prisoner";
   }
 
-  createPrisonerElement() {
-    const sprite = document.createElement("div");
-    sprite.className = "prisoner";
-    sprite.style.left = this.x * this.tileDim + "px";
-    sprite.style.top = this.y * this.tileDim + "px";
-    sprite.style.width = sprite.style.height = this.tileDim + "px";
-    sprite.style.borderRadius = this.tileDim + "px";
-    return sprite;
-  }
   catch() {
     this.el.remove();
     console.log("Removed prisoner from map: ", this.el);
-  }
-  getEdges() {
-    return {
-      left: this.x * this.tileDim,
-      right: this.x * this.tileDim + this.tileDim,
-      top: this.y * this.tileDim,
-      bottom: this.y * this.tileDim + this.tileDim,
-    };
   }
 }
